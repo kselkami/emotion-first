@@ -1,0 +1,15 @@
+.container {
+    background-image: url('https://www.gallery.pangolinphoto.com/img-get2/I00003fuTJ0i4Za8/sec=wdfsdfoeflwefms1440ed20231020MXH6MVVICq1YhEi/fit=2040x2040');
+    background-size: cover;
+    background-position:  top center;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 50%, var(--primary-col) );
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --primary-col: #1e2225;
+    /* --accent-col: hsl(9, 72%, 47%); */
+    --accent-col: turquoise;
+
+    --text-primary: hsl(0, 0%, 95%);
+    --text-light: hsl(0, 0%, 60%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-col);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
