@@ -7,7 +7,9 @@ module.exports = {
       },
     },
   },
-  plugins: {
-    'tailwindcss/nesting': {},
-  }
+  plugins: [ 
+    {
+      'tailwindcss/nesting': {},
+    }
+  ]
 };
