@@ -1,6 +1,4 @@
 import './App.css'
-import FavCard from './components/fav-card/FavCard'
-import HeroArticle from './components/hero-article/HeroArticle'
 import FavSection from './components/fav-section/FavSection'
 import HeroSection from './components/hero-section/HeroSection'
 import Navbar from './components/navbar/Navbar'

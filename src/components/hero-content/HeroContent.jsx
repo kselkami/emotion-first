@@ -1,70 +1,93 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './HeroContent.module.css'
 
 const items = [
   {
     number: '01',
-    title: ['VISIT', 'JAPAN'],
-    subtitle: '',
+    location: 'BOTSWANA',
+    subtitle: 'Learn about Botswana National Tourism',
   },
   {
     number: '02',
-    title: ['VISIT', 'JAPAN'],
-    subtitle: '',
+    location: 'JAPAN',
+    subtitle: 'Learn about Japan National Tourism',
   },
   {
     number: '03',
-    title: ['VISIT', 'JAPAN'],
-    subtitle: '',
+    location: 'SOUTH AFRICA',
+    subtitle: 'Learn about South Africa National Tourism',
   },
   {
     number: '04',
-    title: ['VISIT', 'JAPAN'],
-    subtitle: '',
+    location: 'NAMIBIA',
+    subtitle: 'Learn about Namibia National Tourism',
   },
   {
     number: '05',
-    title: ['VISIT', 'JAPAN'],
-    subtitle: '',
+    location: 'THAILAND',
+    subtitle: 'Learn about Thailand National Tourism',
   },
 ]
 
 const HeroContent = () => {
-  const [selectedItem, setSelectedItem] = useState(3);
+  
+  // the default center item is number 3 
+  const [selectedItem, setSelectedItem] = useState(0);
+  const [preVal, setPreVal] = useState(selectedItem === 0 ? 4 : selectedItem-1);
+  const [nextVal, setNextVal] = useState(selectedItem === 4 ? 0 : selectedItem+1);
+
+  // Test case
+  // console.log([preVal,selectedItem,nextVal]);
+
+
+  // function to loop forwards through scroller items
+  const next = function() {
+    selectedItem === 4 ? setSelectedItem(0) : setSelectedItem(selectedItem+1);
+  }
+
+  // function to loop backwards through scroller items
+  const prev = function() {
+    selectedItem === 0 ? setSelectedItem(4) : setSelectedItem(selectedItem-1);
+  }
+
+  useEffect(() => {
+    setNextVal(selectedItem === 4 ? 0 : selectedItem+1);
+    setPreVal(selectedItem === 0 ? 4 : selectedItem-1);
+  },[selectedItem])
+
+  setInterval(() => {
+    next();
+  },6000)
 
   return (
     <div className={styles.container}>
       <div className={styles.text}>
         <h1>
             <span>VISIT</span>
-            <span>BOTSWANA</span>
+            <span>{items[selectedItem].location}</span>
         </h1>
-        <h4>Welcome to Japan National Tourism</h4>
+        <h4>{items[selectedItem].subtitle}</h4>
       </div>
-      <Scroller selectedItem={selectedItem}/>
+      <Scroller props={{selectedItem,preVal,nextVal,prev,next}}/>
     </div>
   )
 }
 
-const Scroller = ({selectedItem}) => {
+
+const Scroller = ({props}) => {
+  const {selectedItem,preVal,nextVal,prev,next} = props;
+
   return (
     <div className={styles.scroller}>
-      {
-        items.map((info, index)=>(
-          <ScrollerItem index={index} info={info} selectedItem={selectedItem}/>
-        )).filter((i, index) => {
-          return index === selectedItem || index === selectedItem - 1 || index === selectedItem + 1;
-        })
-      }
-  </div>
-  )
-}
-
-const ScrollerItem = ({info, index, selectedItem}) => {
-  return (
-    <div className={index===selectedItem ? `${styles.scroller_item}` : `${styles.scroller_item} ${styles.active}`}>
-      <span className={index===selectedItem ? `${styles.scroller_number} ${styles.active}` : `${styles.scroller_number}`}>{info.number}</span>
-      <span className={index===selectedItem ? `${styles.scroller_line} ${styles.active}` : `${styles.scroller_line}`}/>
+          <button onClick={prev} className={styles.scroller_item}>
+            <span className={styles.scroller_number}>{items[preVal].number}</span>
+          </button>
+          <div className={`${styles.scroller_item} ${styles.active}`}>
+            <span className={`${styles.scroller_number} ${styles.active}`}>{items[selectedItem].number}</span>
+          </div>
+          <button onClick={next} className={styles.scroller_item}>
+            <span className={styles.scroller_number}>{items[nextVal].number}</span>
+          </button>
     </div>
   )
 }

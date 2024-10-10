@@ -37,10 +37,20 @@
     align-items: center;
     gap: 0.5rem;
     margin: 6px 0;
+    background-color: transparent;
+    border: none;
+
+    :hover {
+        cursor: pointer;
+    }
 }
 
 .scroller_item.active {
     transform: translateX(16px);
+
+    :hover {
+        cursor:default;
+    }
 }
 
 .scroller_number {
